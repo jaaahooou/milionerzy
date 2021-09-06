@@ -74,14 +74,14 @@ document
   .addEventListener("click", callToAFriend);
 
 function handleHalfOnHalfAnswer(data) {
-  tipDiv.innerText = data.text;
+  tipDiv.innerText = data.answersToRemove;
 }
 
 function halfOnHalf() {
-  fetch(`/help/friend`, {
+  fetch(`/help/half`, {
     method: "GET",
   })
     .then((r) => r.json())
-    .then((data) => handleHalfOnHalfAnswer(data));
+    .then((data) => console.log(data));
 }
 document.querySelector("#halfOnHalf").addEventListener("click", halfOnHalf);

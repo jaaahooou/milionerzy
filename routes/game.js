@@ -7,6 +7,7 @@ function gameRoutes(app) {
   let questionToTheCrowd = false;
   let halfOnHalf = false;
   let callToAFriendUsed = false;
+  let halfOnHalfUsed = false;
 
   const questions = [
     {
@@ -83,6 +84,29 @@ function gameRoutes(app) {
             question.answers[question.correctAnswer]
           }`
         : "Nie mam kurwa pojęcia",
+    });
+  });
+
+  app.get("/help/half", (req, res) => {
+    if (halfOnHalfUsed) {
+      return res.json({
+        text: "To koło ratunkowe było już wykorzystane",
+      });
+    }
+
+    halfOnHalfUsed = true;
+
+    const question = questions[goodAnswers];
+
+    const answersCopy = question.answers.filter(
+      (s, index) => index !== question.correctAnswer
+    );
+
+    console.log(answersCopy);
+    answersCopy.splice(~~(Math.random() * answersCopy.length), 1);
+
+    res.json({
+      answersToRemove: answersCopy,
     });
   });
 }
