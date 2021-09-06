@@ -72,3 +72,16 @@ function callToAFriend() {
 document
   .querySelector("#callToAFriend")
   .addEventListener("click", callToAFriend);
+
+function handleHalfOnHalfAnswer(data) {
+  tipDiv.innerText = data.text;
+}
+
+function halfOnHalf() {
+  fetch(`/help/friend`, {
+    method: "GET",
+  })
+    .then((r) => r.json())
+    .then((data) => handleHalfOnHalfAnswer(data));
+}
+document.querySelector("#halfOnHalf").addEventListener("click", halfOnHalf);
