@@ -19,12 +19,18 @@ function showNextQuestion() {
 
 showNextQuestion();
 
+const goodAnswersSpan = document.querySelector("#good-answers");
+function handleAnswerFeedback(data) {
+  goodAnswersSpan.innerText = data.goodAnswers;
+  showNextQuestion();
+}
+
 function sendAnswer(answerIndex) {
   fetch(`/answer/${answerIndex}`, {
     method: "POST",
   })
     .then((r) => r.json())
-    .then((data) => handeAnswerFeedback(data));
+    .then((data) => handleAnswerFeedback(data));
 }
 
 const buttons = document.querySelectorAll("button");

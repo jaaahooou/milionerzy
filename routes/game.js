@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 function gameRoutes(app) {
   let goodAnswers = 0;
   let isGameOver = false;
