@@ -63,6 +63,22 @@ function gameRoutes(app) {
 
     res.json({ correct: isGoodAnswer, goodAnswers });
   });
+
+  app.get("/help/friend", (req, res) => {
+    if (callToAFriendUsed) {
+      return res.json({
+        test: "To koło ratunkowe było już wykorzystane",
+      });
+    }
+
+    const doesFriendKnowAnswer = Math.random() < 0.5;
+    const question = questions[goodAnswers];
+    res.json({
+      text: doesFriendKnowAnswer
+        ? `Wydaje mi się, że odpowiedź to ${question.answers[correctAnswer]}`
+        : "Nie mam kurwa pojęcia",
+    });
+  });
 }
 
 module.exports = gameRoutes;

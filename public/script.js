@@ -46,7 +46,7 @@ function sendAnswer(answerIndex) {
     .then((data) => handleAnswerFeedback(data));
 }
 
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll(".answer-button");
 
 for (const button of buttons) {
   button.addEventListener("click", (event) => {
