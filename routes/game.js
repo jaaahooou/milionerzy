@@ -34,7 +34,7 @@ function gameRoutes(app) {
       });
     } else if (isGameOver) {
       res.json({
-        loser: true,
+        looser: true,
       });
     } else {
       const nextQuestion = questions[goodAnswers];

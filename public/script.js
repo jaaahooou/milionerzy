@@ -1,6 +1,19 @@
 const question = document.querySelector("#question");
+const gameBoard = document.querySelector("#game-board");
+const h2 = document.querySelector("h2");
 
 function fillQuestionElements(data) {
+  if (data.winner === true) {
+    gameBoard.style.display = "none";
+    h2.innerText = "WYGRANA!";
+    return;
+  }
+  if (data.looser === true) {
+    gameBoard.style.display = "none";
+    h2.innerText = "NIESTETY PRZEGRAŁEŚ";
+    return;
+  }
+
   question.innerText = data.question;
 
   for (const i in data.answers) {
@@ -41,4 +54,12 @@ for (const button of buttons) {
     console.log(answerIndex);
     sendAnswer(answerIndex);
   });
+}
+
+function callToAFriend() {
+  fetch(`/help/friend`, {
+    method: "GET",
+  })
+    .then((r) => r.json())
+    .then((data) => console.log(data));
 }
