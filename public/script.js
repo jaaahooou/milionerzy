@@ -56,10 +56,19 @@ for (const button of buttons) {
   });
 }
 
+const tipDiv = document.querySelector("#tip");
+function handleFriendsAnswer(data) {
+  tipDiv.innerText = data.text;
+}
+
 function callToAFriend() {
   fetch(`/help/friend`, {
     method: "GET",
   })
     .then((r) => r.json())
-    .then((data) => console.log(data));
+    .then((data) => handleFriendsAnswer(data));
 }
+
+document
+  .querySelector("#callToAFriend")
+  .addEventListener("click", callToAFriend);

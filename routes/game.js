@@ -6,6 +6,7 @@ function gameRoutes(app) {
   let callToAFriend = false;
   let questionToTheCrowd = false;
   let halfOnHalf = false;
+  let callToAFriendUsed = false;
 
   const questions = [
     {
@@ -67,15 +68,20 @@ function gameRoutes(app) {
   app.get("/help/friend", (req, res) => {
     if (callToAFriendUsed) {
       return res.json({
-        test: "To koło ratunkowe było już wykorzystane",
+        text: "To koło ratunkowe było już wykorzystane",
       });
     }
 
+    callToAFriendUsed = true;
+
     const doesFriendKnowAnswer = Math.random() < 0.5;
     const question = questions[goodAnswers];
+
     res.json({
       text: doesFriendKnowAnswer
-        ? `Wydaje mi się, że odpowiedź to ${question.answers[correctAnswer]}`
+        ? `Wydaje mi się, że odpowiedź to ${
+            question.answers[question.correctAnswer]
+          }`
         : "Nie mam kurwa pojęcia",
     });
   });
