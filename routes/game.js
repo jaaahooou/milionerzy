@@ -8,6 +8,7 @@ function gameRoutes(app) {
   let halfOnHalf = false;
   let callToAFriendUsed = false;
   let halfOnHalfUsed = false;
+  let questionToTheCrowdUsed = false;
 
   const questions = [
     {
@@ -111,6 +112,13 @@ function gameRoutes(app) {
   });
 
   app.get("/help/crowd", (req, res) => {
+    if (questionToTheCrowdUsed) {
+      return res.json({
+        text: "To koło ratunkowe było już wykorzystane",
+      });
+    }
+    questionToTheCrowdUsed = true;
+
     const chart = [10, 20, 30, 40];
 
     for (let i = chart.length - 1; i > 0; i--) {
