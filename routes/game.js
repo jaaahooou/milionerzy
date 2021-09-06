@@ -109,6 +109,24 @@ function gameRoutes(app) {
       answersToRemove: answersCopy,
     });
   });
+
+  app.get("/help/crowd", (req, res) => {
+    const chart = [10, 20, 30, 40];
+
+    for (let i = chart.length - 1; i > 0; i--) {
+      const change = Math.floor(Math.random() * 20 - 10);
+
+      chart[i] += change;
+      chart[i - 1] -= change;
+    }
+    const question = questions[goodAnswers];
+    const { correctAnswer } = question;
+    [chart[3], chart[correctAnswer]] = [chart[correctAnswer], chart[3]];
+
+    res.json({
+      chart,
+    });
+  });
 }
 
 module.exports = gameRoutes;

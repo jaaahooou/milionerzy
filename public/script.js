@@ -79,7 +79,7 @@ function handleHalfOnHalfAnswer(data) {
   } else {
     for (const button of buttons) {
       if (data.answersToRemove.indexOf(button.innerText) > -1) {
-        button.innerText = "";
+        button.style.display = "none";
       }
     }
   }
@@ -93,3 +93,26 @@ function halfOnHalf() {
     .then((data) => handleHalfOnHalfAnswer(data));
 }
 document.querySelector("#halfOnHalf").addEventListener("click", halfOnHalf);
+
+function handleCrowdAnswer(data) {
+  if (typeof data.text === "string") {
+    tipDiv.innerText = data.text;
+  } else {
+    for (const button of buttons) {
+      if (data.answersToRemove.indexOf(button.innerText) > -1) {
+        button.style.display = "none";
+      }
+    }
+  }
+}
+
+function questionToTheCrowd() {
+  fetch(`/help/crowd`, {
+    method: "GET",
+  })
+    .then((r) => r.json())
+    .then((data) => console.log(data));
+}
+document
+  .querySelector("#questionToTheCrowd")
+  .addEventListener("click", questionToTheCrowd);
